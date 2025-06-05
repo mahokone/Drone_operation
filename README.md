@@ -1,4 +1,4 @@
-# Project 5 - Secret Service Drone Operations
+# Project - Drone Operations
 
 ## RFRE Fall 2024
 
@@ -22,14 +22,14 @@ With the general vectors of attack that were provided the ones I attempted to ex
 --Being able to read the drones WiFi Packet Communications
 --Remote Camera Access
 
-### Show drone WiFi communication packets 1 points 
+### Show drone WiFi communication packets 
 I thought it was a good idea to first run a simple Wireshark and see what packet it is sending and receiving. For this initial step of the project, I first needed to activate the drone and the controller so the wifi connection would be visible. After connecting my devices was apart of the Drones wifi network. Fianlly I just ran a simple WIFI scan using wire shark.
 
 ![Wireshark](./Picture/Wireshark.png)
 
 These are the packet I found. 
 
-### Discover open ports on the drone 1 points 
+### Discover open ports on the drone
 I first went to my WIFI settings and looked for the WIFI information 
 
 ![wifi](./Picture/wifi.png)
@@ -39,12 +39,12 @@ To discover open port I went on my Ubuntu vm and ran an nmap on the defaut gatew
 
 ![nmap](./Picture/Nmap.png)
 
-### Demonstrate Remote File Access 3 points 
+### Demonstrate Remote File Access 
 As can be seen by this nmap scan, there is sever  open ports that can be accessed. I decided to focus on `telnet`  which used port:`23`. I ran this command `telnet 192.168.0.1 23` to access the drones Linux shell. I was then asked to enter a login I typed root and just like that i had root privilege to the drone.
 
 ![root](./Picture/telnet.png)
 
-### Change the drone's WiFi password  4 points / Change the BCID of the drone's WiFi network 4 points = 8 points 
+### Change the drone's WiFi password / Change the BCID of the drone's WiFi network
 From this point on I began to experiment and look through all the files I had access to. I was specifically looking for the WiFi configurations. I then tried typing the IP of my drone into the browser and found a web domain. What I essentially found is a web interface containing stuff like where the log files, media, and configurations are supposed to stored.
 
 ![web](./Picture/Wifi_org.png)
@@ -58,7 +58,7 @@ When loading up the IP on the localhost again the changes are kept and are displ
 
 ![changed](./Picture/Wifi_change.png)
 
-### Gain Unauthorized Remote Camera Access 5 points   
+### Gain Unauthorized Remote Camera Access
 Using the drone open ports I decided to use the `ffmpeg` package to play and view a live feed of the video. 
 after downloading the package I then ran the command `ffplay -rtsp_transport tcp rtsp://192.168.0.1:554/live` to view the live feed of the drone.
 
